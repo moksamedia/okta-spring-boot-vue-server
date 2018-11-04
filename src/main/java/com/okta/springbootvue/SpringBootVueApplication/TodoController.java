@@ -16,41 +16,14 @@ public class TodoController {
         this.repository = repository;
     }
 
-    @PostMapping("/todo")
-    public String addTodo(@RequestBody String text) {
-        Todo todo = new Todo();
-        todo.setText(text);
-        repository.save(todo);
-        return "success";
-    }
-
-    @PutMapping("/todo/{id}")
-    public String updateTodo(@PathVariable Long id, @RequestBody String text, @RequestBody Boolean completed) {
-        Todo todo = repository.findById(id).orElseThrow(() -> new RuntimeException("Todo not found for id"));
-        todo.setText(text);
-        todo.setCompleted(completed);
-        return "success";
-    }
-
-    @GetMapping("/todo/{id}")
-    public Todo getTodoForId(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Todo not found for id"));
-    }
-    
-    @GetMapping("/todo")
-    public Collection<Todo> getAllTodos() {
-        return repository.findAll().stream()
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("/todo/completed")
+    @GetMapping("/todos/completed")
     public Collection<Todo> todosCompleted() {
         return repository.findAll().stream()
                 .filter(todo -> todo.getCompleted())
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/todo/uncompleted")
+    @GetMapping("/todos/uncompleted")
     public Collection<Todo> todosUncompleted() {
         return repository.findAll().stream()
                 .filter(todo -> !todo.getCompleted())
