@@ -17,7 +17,7 @@ public class Todo {
     @Id @GeneratedValue
     private Long id;
 
-    private @NonNull String text;
+    private @NonNull String title;
 
     private Boolean completed = false;
     
