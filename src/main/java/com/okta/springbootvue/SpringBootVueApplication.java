@@ -1,4 +1,4 @@
-package com.okta.springbootvue.SpringBootVueApplication;
+package com.okta.springbootvue;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,10 +19,11 @@ public class SpringBootVueApplication {
 		SpringApplication.run(SpringBootVueApplication.class, args);
 	}
 
+	
 	@Bean
 	ApplicationRunner init(TodoRepository repository) {
 		return args -> {
-			Stream.of("Buy milk", "Eat pizza", "Write tutorial", "Study Tibetan", "Go kayaking").forEach(name -> {
+			Stream.of("Buy milk", "Eat pizza", "Write tutorial", "Study Vue.js", "Go kayaking").forEach(name -> {
 				Todo todo = new Todo();
 				todo.setTitle(name);
 				repository.save(todo);
@@ -37,7 +38,7 @@ public class SpringBootVueApplication {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
-		config.setAllowedOrigins(Collections.singletonList("http://localhost:8081"));
+		config.setAllowedOrigins(Collections.singletonList("http://localhost:8080"));
 		config.setAllowedMethods(Collections.singletonList("*"));
 		config.setAllowedHeaders(Collections.singletonList("*"));
 		source.registerCorsConfiguration("/**", config);
@@ -45,4 +46,5 @@ public class SpringBootVueApplication {
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
+	
 }
