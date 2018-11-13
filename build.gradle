@@ -31,8 +31,16 @@ dependencies {
 	runtimeOnly('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	compile ('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('com.okta.spring:okta-spring-boot-starter:0.6.0')
+	compile ('com.okta.spring:okta-spring-boot-starter:0.6.1')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('org.springframework.security:spring-security-test')
+}
+
+/*
+	This is required to resolve a logging dependency conflict between the
+	okta-spring-boot-starter and the various spring dependencies.
+ */
+configurations.all {
+	exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	exclude group: 'org.springframework.boot', module: 'logback-classic'
 }
