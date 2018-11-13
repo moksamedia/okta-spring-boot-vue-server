@@ -1,2 +1,3 @@
 # so as not to conflict with Vue on 8080
-server.port = 9000
+server:
+  port: 9000
