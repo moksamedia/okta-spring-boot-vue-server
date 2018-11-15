@@ -7,17 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class Todo {
     
     @Id @GeneratedValue
     private Long id;
 
-    private @NonNull String title;
+    @NonNull
+    private String title;
 
     private Boolean completed = false;
     
